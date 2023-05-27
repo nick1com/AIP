@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class SurfaceScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float rotationSpeed = 1f;
+    public float scale = 10;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
+        float rotationX = Input.GetAxis("Vertical") *scale; //inout from up and down arrows
+        float rotationZ = Input.GetAxis("Horizontal") *scale; //input from left and right arrows
+
+        Quaternion newRotation = Quaternion.Euler(rotationX, 0f, rotationZ); //Stores rotation
+
+ 
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime); //applies rotation based on input
     }
 }
